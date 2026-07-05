@@ -34,4 +34,16 @@ public class CountryService {
         LOGGER.info("END getCountry()");
         return result;
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Country> getAllCountries() {
+        LOGGER.info("START getAllCountries()");
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("country.xml");
+        List<Country> countryList = (List<Country>) context.getBean("countryList", List.class);
+
+        LOGGER.debug("getAllCountries() count={}", countryList.size());
+        LOGGER.info("END getAllCountries()");
+        return countryList;
+    }
 }

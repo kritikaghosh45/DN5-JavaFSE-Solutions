@@ -1,5 +1,7 @@
 package com.cognizant.springlearn.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,14 @@ public class CountryController {
         Country country = context.getBean("country", Country.class);
         LOGGER.info("END getCountryIndia()");
         return country;
+    }
+
+    @GetMapping("/countries")
+    public List<Country> getAllCountries() {
+        LOGGER.info("START getAllCountries()");
+        List<Country> countries = countryService.getAllCountries();
+        LOGGER.info("END getAllCountries()");
+        return countries;
     }
 
     @GetMapping("/countries/{code}")
