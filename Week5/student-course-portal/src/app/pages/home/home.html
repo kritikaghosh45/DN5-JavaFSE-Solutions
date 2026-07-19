@@ -1,4 +1,4 @@
-<h1>Welcome to the Student Course Portal</h1>
+<h1>{{ portalName }}</h1>
 <p>Browse courses, track your enrollment, and manage your academic profile all in one place.</p>
 
 <div class="stats-row">
@@ -15,3 +15,18 @@
     <span class="stat-label">GPA</span>
   </div>
 </div>
+
+<!--
+  Property binding [disabled] is one-way: component -> DOM.
+  It sets the DOM property based on the component's value, but changes
+  in the DOM (e.g. user interaction) do not flow back to the component.
+
+  Two-way binding [(ngModel)] combines property binding with event binding:
+  it both sets the DOM from the component AND listens for DOM changes
+  to update the component. Data flows in both directions: DOM <-> component.
+-->
+<button [disabled]="!isPortalActive" (click)="onEnrollClick()">Enroll Now</button>
+<p *ngIf="message">{{ message }}</p>
+
+<input [(ngModel)]="searchTerm" placeholder="Search courses...">
+<p>Searching for: {{ searchTerm }}</p>
