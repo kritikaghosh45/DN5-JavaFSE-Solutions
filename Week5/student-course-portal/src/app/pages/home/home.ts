@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { CourseService } from '../../services/course';
 import { CourseSummaryWidget } from '../../components/course-summary-widget/course-summary-widget';
+import { NotificationComponent } from '../../components/notification/notification';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, NgIf, CourseSummaryWidget],
+  imports: [FormsModule, NgIf, CourseSummaryWidget, NotificationComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

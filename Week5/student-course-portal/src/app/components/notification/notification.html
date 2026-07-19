@@ -1,0 +1,6 @@
+﻿<div class="notification-widget">
+  <button (click)="addTestMessage()">Add Notification</button>
+  <ul>
+    <li *ngFor="let msg of messages">{{ msg }}</li>
+  </ul>
+</div>
