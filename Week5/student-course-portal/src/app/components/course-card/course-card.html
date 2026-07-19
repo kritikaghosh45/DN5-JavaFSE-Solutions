@@ -1,4 +1,4 @@
-<div class="course-card" appHighlight="lightblue" [ngClass]="cardClasses" [ngStyle]="{ 'border-left': '5px solid ' + borderColor }">
+﻿<div class="course-card" appHighlight="lightblue" [ngClass]="cardClasses" [ngStyle]="{ 'border-left': '5px solid ' + borderColor }">
   <h3>{{ course.name }}</h3>
   <p>Code: {{ course.code }}</p>
   <p>ID: {{ course.id }}</p>
@@ -14,6 +14,6 @@
     <p>Additional details for {{ course.name }} would appear here.</p>
   </div>
 
-  <button (click)="onEnrollClick()">Enroll</button>
+  <button (click)="onEnrollClick()">{{ isEnrolled ? 'Unenroll' : 'Enroll' }}</button>
   <button (click)="toggleExpanded()">Show Details</button>
 </div>

@@ -1,9 +1,9 @@
-<h1>{{ portalName }}</h1>
+﻿<h1>{{ portalName }}</h1>
 <p>Browse courses, track your enrollment, and manage your academic profile all in one place.</p>
 
 <div class="stats-row">
   <div class="stat">
-    <span class="stat-value">12</span>
+    <span class="stat-value">{{ courseCount }}</span>
     <span class="stat-label">Courses Available</span>
   </div>
   <div class="stat">
@@ -16,17 +16,10 @@
   </div>
 </div>
 
-<!--
-  Property binding [disabled] is one-way: component -> DOM.
-  It sets the DOM property based on the component's value, but changes
-  in the DOM (e.g. user interaction) do not flow back to the component.
-
-  Two-way binding [(ngModel)] combines property binding with event binding:
-  it both sets the DOM from the component AND listens for DOM changes
-  to update the component. Data flows in both directions: DOM <-> component.
--->
 <button [disabled]="!isPortalActive" (click)="onEnrollClick()">Enroll Now</button>
 <p *ngIf="message">{{ message }}</p>
 
 <input [(ngModel)]="searchTerm" placeholder="Search courses...">
 <p>Searching for: {{ searchTerm }}</p>
+
+<app-course-summary-widget></app-course-summary-widget>

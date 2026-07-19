@@ -1,7 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { NgSwitch, NgSwitchCase, NgClass, NgStyle, NgIf } from '@angular/common';
 import { CreditLabelPipe } from '../../pipes/credit-label-pipe';
 import { Highlight } from '../../directives/highlight';
+import { EnrollmentService } from '../../services/enrollment';
+import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-course-card',
@@ -10,17 +12,22 @@ import { Highlight } from '../../directives/highlight';
   styleUrl: './course-card.css'
 })
 export class CourseCard implements OnChanges {
-  @Input() course!: { id: number, name: string, code: string, credits: number, gradeStatus?: string };
+  @Input() course!: Course;
   @Output() enrollRequested = new EventEmitter<number>();
 
-  isEnrolled = false;
   isExpanded = false;
+
+  constructor(private enrollmentService: EnrollmentService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['course']) {
       console.log('previous:', changes['course'].previousValue);
       console.log('current:', changes['course'].currentValue);
     }
+  }
+
+  get isEnrolled() {
+    return this.enrollmentService.isEnrolled(this.course.id);
   }
 
   get borderColor() {
@@ -42,7 +49,11 @@ export class CourseCard implements OnChanges {
   }
 
   onEnrollClick() {
-    this.isEnrolled = true;
-    this.enrollRequested.emit(this.course.id);
+    if (this.isEnrolled) {
+      this.enrollmentService.unenroll(this.course.id);
+    } else {
+      this.enrollmentService.enroll(this.course.id);
+      this.enrollRequested.emit(this.course.id);
+    }
   }
 }
